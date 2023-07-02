@@ -1,5 +1,13 @@
+import Button from "./Button"
+
 const Navbar = () => {
-    return <div className="navbar navbar-style-1">
+
+  const onClick = () =>{
+    console.log("clicked")
+  }
+
+  return (
+    <div className="navbar navbar-style-1">
       <div className="navbar-inner">
         <a href="#" className="link back">
           <svg
@@ -17,10 +25,11 @@ const Navbar = () => {
         </a>
         <div className="title">ReacTask</div>
         <div className="right">
-        <button class="col button button-fill">Add Task</button>
+          <Button functions="Add Task" color="green" onClick={onClick}/>
         </div>
       </div>
-    </div>;
-  }
+    </div>
+  );
+};
 
-  export default Navbar ;
+export default Navbar;
