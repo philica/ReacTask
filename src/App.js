@@ -25,6 +25,11 @@ const App = () => {
     },
   ]);
 
+  //Add task 
+const addTask = (newtask)=>{
+ setTasks(tasks.map((task)=>([...task,newtask])))
+}
+
   //delete clicked task
   const deleteTask = (id) => {
     console.log("task " + id);
@@ -36,7 +41,7 @@ const App = () => {
     console.log(id);
     setTasks(
       tasks.map((task) =>
-        task.id == id ? { ...task, reminder: !task.reminder } : task
+        task.id === id ? { ...task, reminder: !task.reminder } : task
       )
     );
     console.log(tasks);
