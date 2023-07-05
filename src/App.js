@@ -16,18 +16,20 @@ const App = () => {
       text: "Meeting at School",
       day: "Feb 6th at 1:30pm",
       reminder: true,
-    },
-    {
-      id: 3,
-      text: "Doctors Appointment",
-      day: "Feb 5th at 2:30pm",
-      reminder: true,
-    },
+    }
   ]);
 
+  //show or hide  task adding form
+
+  const [formState,setFormState] = useState(false)
+ 
   //Add task 
 const addTask = (newtask)=>{
- setTasks(tasks.map((task)=>([...task,newtask])))
+setTasks([...tasks,newtask])
+console.log(newtask)
+console.log(tasks)
+
+
 }
 
   //delete clicked task
@@ -47,15 +49,23 @@ const addTask = (newtask)=>{
     console.log(tasks);
   };
 
+  //toggle form view or hide
+  const toggleForm = ()=>{
+    setFormState(!formState)
+  }
+
   return (
     <div className="App">
       <div className="page page-current">
 
-        <Navbar />
+        <Navbar toggleForm={toggleForm} formState={formState}/>
         <Tasks
           tasks={tasks}
           deleteTask={deleteTask}
           toggleReminder={toggleReminder}
+          onAdd={addTask}
+          formState={formState}
+          toggleForm={toggleForm}
         />
       </div>
     </div>

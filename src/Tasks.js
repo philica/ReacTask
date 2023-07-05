@@ -1,7 +1,7 @@
 import Task from "./Task";
 import Form from "./Form"
 
-const Tasks = ({tasks,deleteTask,toggleReminder}) => {
+const Tasks = ({tasks,deleteTask,toggleReminder,onAdd,formState,toggleForm}) => {
   return (
     <div className="page-content bg-gray pt-90 bottom-sp30">
       <div className="container">
@@ -9,7 +9,7 @@ const Tasks = ({tasks,deleteTask,toggleReminder}) => {
 
         <div className="notification-list mb-30">
           <ul>
-          <Form />
+           {formState && <Form taskAdd={onAdd} toggleForm={toggleForm}/>}
            <Task tasks={tasks} deleteTask={deleteTask} toggleReminder={toggleReminder}/>
           </ul>
         </div>

@@ -1,10 +1,11 @@
 import Button from "./Button"
 
-const Navbar = () => {
+const Navbar = ({toggleForm,formState}) => {
 
-  const onClick = () =>{
-    console.log("clicked")
-  }
+ const onAddClick = ()=>{
+  toggleForm()
+
+ }
 
   return (
     <div className="navbar navbar-style-1">
@@ -25,7 +26,7 @@ const Navbar = () => {
         </a>
         <div className="title">ReacTask</div>
         <div className="right">
-          <Button functions="Add Task" color="green" onClick={onClick}/>
+          <Button functions={formState? "Close Form" : "Add Task"}  onClick={onAddClick} />
         </div>
       </div>
     </div>
