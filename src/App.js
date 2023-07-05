@@ -1,36 +1,35 @@
 import Navbar from "./Navbar";
 import Tasks from "./Tasks";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const App = () => {
   //list of tasks array
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      text: "Learn React",
-      day: "Feb 5th at 2:30pm",
-      reminder: true,
-    },
-    {
-      id: 2,
-      text: "Meeting at School",
-      day: "Feb 6th at 1:30pm",
-      reminder: true,
-    }
-  ]);
-
+  const [tasks, setTasks] = useState([]);
   //show or hide  task adding form
+  const [formState, setFormState] = useState(true);
 
-  const [formState,setFormState] = useState(false)
- 
-  //Add task 
-const addTask = (newtask)=>{
-setTasks([...tasks,newtask])
-console.log(newtask)
-console.log(tasks)
+  //load data from server 
+  useEffect(()=>{
+    const getTasks = async ()=>{
+      const tasks = await fetchTask()
+      setTasks(tasks)
+    }
+    getTasks()
+  },[])
 
+  //fetch task from server
+  const fetchTask= async ()=>{
+    const res = await fetch('http://localhost:5000/tasks')
+    const data = await res.json()
 
-}
+    return data
+  }
+  //Add task
+  const addTask = (newtask) => {
+    setTasks([...tasks, newtask]);
+    console.log(newtask);
+    console.log(tasks);
+  };
 
   //delete clicked task
   const deleteTask = (id) => {
@@ -50,15 +49,14 @@ console.log(tasks)
   };
 
   //toggle form view or hide
-  const toggleForm = ()=>{
-    setFormState(!formState)
-  }
+  const toggleForm = () => {
+    setFormState(!formState);
+  };
 
   return (
     <div className="App">
       <div className="page page-current">
-
-        <Navbar toggleForm={toggleForm} formState={formState}/>
+        <Navbar toggleForm={toggleForm} formState={formState} />
         <Tasks
           tasks={tasks}
           deleteTask={deleteTask}
